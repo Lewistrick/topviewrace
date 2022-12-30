@@ -4,9 +4,8 @@
 - Select a map to play (click the title).
 - Use arrow up to accelerate, arrow down to break (neither means slow breaking).
 - Use the left and right keys to rotate your car.
-- No need to use acceleration. It starts at 0 speed, accelerates slowly, and goes to 100 speed max.
 - Collect all checkpoints (green) and race to the finish (blue). Avoid red (slowdown).
-- If you drive into a wall, you start at the last checkpoint.
+- If you drive into a wall, your speed will be set to 0.
 
 ## Creating maps
 - Register a new map in the maps.json file. Specify the following fields:
