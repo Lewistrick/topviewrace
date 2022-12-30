@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "topviewrace"
+version = "0.1.0"
+description = "A two-key racing game that is played from top view."
+authors = ["Erick Wilts <erickwilts@proton.me>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+python-dotenv = "^0.21.0"
+pygame = "^2.1.2"
+black = "^22.10.0"
+mypy = "^0.991"
+scipy = "^1.9.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,46 @@
+{
+    "maps": [
+        {
+            "name": "Example map",
+            "author": "Lewistrick",
+            "img": "example.png",
+            "start": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "colors": {
+                "wall": [
+                    0,
+                    0,
+                    0
+                ],
+                "checkpoint": [
+                    0,
+                    255,
+                    0
+                ],
+                "finish": [
+                    0,
+                    0,
+                    255
+                ],
+                "slowdown": [
+                    255,
+                    0,
+                    0
+                ]
+            }
+        },
+        {
+            "name": "Square",
+            "author": "Lewistrick",
+            "img": "square.png",
+            "start": [
+                20,
+                20
+            ],
+            "rotation": 0
+        }
+    ]
+}
