@@ -97,8 +97,9 @@ class Track:
 
         return blobs
 
-    def get_element_at(self, pos: Pos) -> tuple[str, int] | None:
+    def get_element_at(self, pos: Pos, prevpos: Pos) -> tuple[str, int] | None:
         """Get the element at a certain position."""
+        # to do: fix
         element = self.pixel_maps.get(pos)
         return element
 

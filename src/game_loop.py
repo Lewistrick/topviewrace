@@ -25,11 +25,12 @@ def game_loop(
 
         # move the car, given the speed and rotation
         prevpos = (car.x, car.y)
+        previntpos = car.intpos
         car.turn(pressed[pygame.K_LEFT], pressed[pygame.K_RIGHT])
         car.accelerate(pressed[pygame.K_UP], pressed[pygame.K_DOWN])
         car_rect = car.update(screen.width, screen.height)
 
-        if element := track.get_element_at(car.intpos):
+        if element := track.get_element_at(car.intpos, previntpos):
             part, i = element
             if part == "wall":
                 car.x, car.y = prevpos

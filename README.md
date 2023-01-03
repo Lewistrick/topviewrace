@@ -1,5 +1,15 @@
 # Top View Racer
 
+## Installation instructions
+### Python setup
+- `python -m venv .venv` (should be 3.10)
+- `.venv\Scripts\activate`
+- `python -m pip install poetry`
+- `python -m poetry install`
+
+### Start the game
+- `python src/main.py`
+
 ## Gameplay
 - Select a map to play (click the title).
 - Use arrow up to accelerate, arrow down to break (neither means slow breaking).
