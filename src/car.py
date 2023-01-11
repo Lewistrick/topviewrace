@@ -3,12 +3,10 @@ from time import time
 
 import pygame
 
-from ui import Screen
-
 
 class Car:
-    max_speed = 20
-    max_rotspeed = 10
+    max_speed = 10
+    max_rotspeed = 6
 
     def __init__(self, x, y, rotation):
         self.x = x
@@ -20,6 +18,10 @@ class Car:
         self.rect = self.image.get_rect()
         self.rect.center = (int(self.x), int(self.y))
         self.start_time = None
+
+    @property
+    def pos(self):
+        return self.x, self.y
 
     @property
     def intpos(self):
@@ -54,7 +56,7 @@ class Car:
         return pygame.transform.rotate(self.image, -self.rotation)
 
     def turn(self, left_pressed: bool, right_pressed: bool):
-        self.rotspeed += right_pressed - left_pressed
+        self.rotspeed += (right_pressed - left_pressed) * 0.4
 
         if self.rotspeed > self.max_rotspeed:
             self.rotspeed = self.max_rotspeed

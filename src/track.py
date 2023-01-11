@@ -1,13 +1,17 @@
 import json
+from collections import defaultdict
 from pathlib import Path
+from typing import Generator
 
 import pygame
 from scipy.ndimage import label
+from skimage.draw import line_aa
 
 MAPS_DIR = Path("maps")
 MAPS_JSON = json.load((MAPS_DIR / "maps.json").open())
 
 Color = tuple[int, int, int] | list[int, int, int]
+Element = tuple[str, int]
 Pos = tuple[int, int]
 Blob = set[Pos]
 
@@ -56,7 +60,7 @@ class Track:
         # colors for the map elements
         self.colors = {}
         self.elements: dict[str, list[Blob]] = {}
-        self.pixel_maps: dict[Pos, tuple[str, int]] = {}
+        self.pixel_maps: dict[Pos, Element] = {}
         override_colors: dict[str, Color] = self.data.get("colors", {})
         for element in ("wall", "checkpoint", "finish", "slowdown"):
             if override_color := override_colors.get(element):
@@ -97,10 +101,34 @@ class Track:
 
         return blobs
 
-    def get_element_at(self, pos: Pos) -> tuple[str, int] | None:
-        """Get the element at a certain position."""
-        element = self.pixel_maps.get(pos)
-        return element
+    def get_elements_between(
+        self,
+        prevpos: Pos,
+        pos: Pos,
+        threshold: float = 0.5,
+    ) -> Generator[Element, None, None]:
+        """Get elements crossed when moving from `prevpos` to `pos`.
+
+        Args:
+            prevpos (Pos): Previous position
+            pos (Pos): New position
+
+        Returns:
+            Generator[Element, None, None]: Generator of elements crossed.
+                Elements are (str,int) tuples indicating the element type and the blob
+                number to differentiate between multiple elements of the same type.
+        """
+        # get all pixels crossed when going from prevpos to pos
+        rr, cc, vals = line_aa(*prevpos, *pos)
+
+        crossed_totals: dict[Element, float] = defaultdict(float)
+        for r, c, v in zip(rr, cc, vals):
+            element = self.pixel_maps.get((r, c))
+            if not element or crossed_totals[element] > 0.5:
+                continue
+            crossed_totals[element] += v
+            if crossed_totals[element] > 0.5:
+                yield element
 
 
 if __name__ == "__main__":
