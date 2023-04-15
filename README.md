@@ -1,5 +1,14 @@
 # Top View Racer
 
+## Installation
+- Install Python3.10.
+- Clone this repository. Then from its root directory, run the following commands in a terminal:
+  - `python -m venv .venv`
+  - `.venv\Scripts\activate` (for Linux: `.venv/bin/activate`)
+  - `pip install poetry`
+  - `poetry install`
+  - `poetry run src/main.py`
+
 ## Gameplay
 - Select a map to play (click the title).
 - Use arrow up to accelerate, arrow down to break (neither means slow breaking).
